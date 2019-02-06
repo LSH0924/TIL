@@ -22,7 +22,7 @@
     ```
     > ##### **컴파일에러**
     > The variable argument type String of the method varargs must be the last parameter
-	> The variable argument type int of the method varargs must be the last parameter
+	> <br>The variable argument type int of the method varargs must be the last parameter
 
 
 - 가변인자 부분의 매개변수를 입력하지 않아도 속이 빈 배열이 전달된다. 
@@ -46,12 +46,12 @@
         ```
         > ##### **실행결과**
         > 1 2 3 4 5 int Varargs parameter : [I@70dea4e 
-        > \----- 
-        > int Varargs parameter : [I@5c647e05
-        > \-----
-        > Exception in thread "main" java.lang.**NullPointerException**
-        > at testProject.AtomicTest.varargs(Test.java:13)
-        > at testProject.AtomicTest.main(Test.java:9) 
+        > <br>\----- 
+        > <br>int Varargs parameter : [I@5c647e05
+        > <br>\-----
+        > <br>Exception in thread "main" java.lang.**NullPointerException**
+        > <br>at testProject.AtomicTest.varargs(Test.java:13)
+        > <br>at testProject.AtomicTest.main(Test.java:9) 
 
     - 가변인자에 아무것도 넣지 않았을 때와 null을 넣었을 때(참조형 데이터타입)
         ```
@@ -67,7 +67,8 @@
         ```
         > #### **경고발생**
         > Type null of the last argument to method varargs(String...) doesn't exactly match the vararg parameter type. Cast to String[] to confirm the non-varargs invocation, or pass individual arguments of type String for a varargs invocation.
-        > 메소드varargs(String...)의 마지막 매개변수 null이, 가변인자 파라미터형과 완전히 일치하지 않습니다. 가변인자 호출을 확인하기 위해 String[]으로 캐스팅하거나, 가변인자 호출에 String형의 개별 매개변수를 전달합니다. 
+        > <br>메소드varargs(String...)의 마지막 매개변수 null이, 가변인자 파라미터형과 완전히 일치하지 않습니다. 
+        > <br>가변인자 호출을 확인하기 위해 String[]으로 캐스팅하거나, 가변인자 호출에 String형의 개별 매개변수를 전달합니다. 
 
 
 #### **가변인자를 사용하는 메소드를 오버로드했을 때 호출시 우선순위**
