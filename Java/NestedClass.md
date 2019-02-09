@@ -18,34 +18,35 @@
     - static이 아닌 Nested Class는 생성자를 사용한다.
 
 ```java
-	class OuterClass {
-		//static Nested Class
-        static class StaticDefaultNestedClass{}
-		public static class StaticPublicNestedClass{}
-		protected static class StaticProtectedNestedClass{}
-		private static class StaticPrivateNestedClass{
-			static String className = "StaticPrivateNestedClass";
-		}
-		final static class StaticFinalNestedClass{}
-        
-		//none static Nested Class
-		class DefaultNestedClass{}
-		public class PublicNestedClass{}
-		protected class ProtectedNestedClass{}
-		private class PrivateNestedClass{
-			String className = "PrivateNestedClass";
-		}
-		final class FinalNestedClass{}
-		
-        // NestedClass, static NestedClass 사용하기
-		public static void main(String[] args) {
-		    //static Nested Class
-			System.out.println(StaticPrivateNestedClass.className);
-		    //none static Nested Class
-			System.out.println(new OuterClass().new PrivateNestedClass().className);
-		}
+class OuterClass {
+    //static Nested Class
+    static class StaticDefaultNestedClass{}
+    public static class StaticPublicNestedClass{}
+    protected static class StaticProtectedNestedClass{}
+    private static class StaticPrivateNestedClass{
+        static String className = "StaticPrivateNestedClass";
     }
+    final static class StaticFinalNestedClass{}
+    
+    //none static Nested Class
+    class DefaultNestedClass{}
+    public class PublicNestedClass{}
+    protected class ProtectedNestedClass{}
+    private class PrivateNestedClass{
+        String className = "PrivateNestedClass";
+    }
+    final class FinalNestedClass{}
+    
+    // NestedClass, static NestedClass 사용하기
+    public static void main(String[] args) {
+        //static Nested Class
+        System.out.println(StaticPrivateNestedClass.className);
+        //none static Nested Class
+        System.out.println(new OuterClass().new PrivateNestedClass().className);
+    }
+}
 ```
+
 - private 접근제어자를 가진 NestedClass를 OuterClass 내부에서 사용하지 않을 경우 경고가 발생한다.
 > The type OuterClass.PrivateNestedClass is never used locally
 > <br>The type OuterClass.StaticPrivateNestedClass is never used locally
