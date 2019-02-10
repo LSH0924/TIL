@@ -4,20 +4,20 @@
 - 다른 타입의 매개변수와 같이 사용할 수 있지만, 가변인자는 맨 마지막에 사용해야한다.
     ```java
     public static void varargs(int i, String ...strings) {
-        System.out.println(i);
-        for(String str : strings) {
-            System.out.println(str);
-        }
+      System.out.println(i);
+      for(String str : strings) {
+        System.out.println(str);
+      }
     } //정상 컴파일 됨
     ```
 
 - 가변인자가 여러 개, 혹은 파라미터의 마지막에 위치하지 않을 때
     ```java
     public static void varargs(int ...i, String ...strings, long l) {
-        System.out.println(i);
-        for(String str : strings) {
-            System.out.println(str);
-        }
+      System.out.println(i);
+      for(String str : strings) {
+        System.out.println(str);
+      }
     }
     ```
     > ##### **컴파일에러**
@@ -31,17 +31,17 @@
     - 가변인자에 아무것도 넣지 않았을 때와 null을 넣었을 때(기본형 데이터타입)
         ```java
         public static void main(String[] args) {
-            System.out.println(varargs(1,2,3,4,5));
-            System.out.println("-----");
-            System.out.println(varargs());
-            System.out.println("-----");
-            System.out.println(varargs(null));
+          System.out.println(varargs(1,2,3,4,5));
+          System.out.println("-----");
+          System.out.println(varargs());
+          System.out.println("-----");
+          System.out.println(varargs(null));
         }
         public static String varargs(int ...iarr) {
-            for(int i : iarr) {
-                System.out.print(i + " ");
-            }
-            return "int Varargs parameter : " + iarr;
+          for(int i : iarr) {
+            System.out.print(i + " ");
+          }
+          return "int Varargs parameter : " + iarr;
         }
         ```
         > ##### **실행결과**
@@ -56,13 +56,13 @@
     - 가변인자에 아무것도 넣지 않았을 때와 null을 넣었을 때(참조형 데이터타입)
         ```java
         public static void main(String[] args) {
-            System.out.println(varargs(null));
+          System.out.println(varargs(null));
         }
         public static String varargs(String ...sarr) {
-            for(String i : sarr) {
-                System.out.print(i + " ");
-            }
-            return "String Varargs parameter : " + sarr;
+          for(String i : sarr) {
+            System.out.print(i + " ");
+          }
+          return "String Varargs parameter : " + sarr;
         }
         ```
         > #### **경고발생**
@@ -78,22 +78,22 @@
 - 각각의 메소드를 하나씩 주석처리 하면서 확인해보자.
     ```java
     public static void main(String[] args) {
-        System.out.println(varargs(123456789));
+      System.out.println(varargs(123456789));
     }
     public static String varargs(int i) {
-        return "int parameter : " + i;
+      return "int parameter : " + i;
     } // 실행순위 1
     public static String varargs(long l) {
-        return "long parameter : " + l;
+      return "long parameter : " + l;
     } //실행순위 2
     public static String varargs(Integer i) {
-        return "Integer parameter : " + i;
+      return "Integer parameter : " + i;
     } //실행순위 3
     public static String varargs(int ...iarr) {
-        for(int i : iarr) {
-            System.out.print(i + " ");
-        }
-        return "Varargs parameter : " + iarr;
+      for(int i : iarr) {
+        System.out.print(i + " ");
+      }
+      return "Varargs parameter : " + iarr;
     } //실행순위 4
     ```
 

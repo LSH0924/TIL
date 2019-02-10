@@ -20,12 +20,12 @@
         class Telegram extends Messenger{}
 
         class Test{
-            // 컴파일 에러 안 남
-            public static void main(String[] a){
-                Messenger m1 = new Kakao();
-                Messenger m2 = new Line();
-                Messenger m3 = new Telegram();
-            }
+          // 컴파일 에러 안 남
+          public static void main(String[] a){
+            Messenger m1 = new Kakao();
+            Messenger m2 = new Line();
+            Messenger m3 = new Telegram();
+          }
         }
 
         ```
@@ -42,9 +42,9 @@
         class B extends A{}
         class C extends A{}
         class A{
-            public static void main(String[] args) {
-                B b = new C();
-            }
+          public static void main(String[] args) {
+            B b = new C();
+          }
         }
         ```
         > ##### 컴파일 에러
@@ -55,9 +55,9 @@
 
         ```java
         class A {
-            public static void main(String[] args) {
-                A a = new Object();
-            }
+          public static void main(String[] args) {
+            A a = new Object();
+          }
         }
         ```
         > ##### 컴파일 에러
@@ -66,12 +66,12 @@
 
     - 서브클래스를 슈퍼클래스 타입으로 캐스팅할 때 
         ```java
-            class B extends A{}
-            class A {
-                public static void main(String[] args) {
-                    A a = new B();
-                }
-            }
+        class B extends A{}
+        class A {
+          public static void main(String[] args) {
+            A a = new B();
+          }
+        }
         ```
     - 슈퍼클래스의 static이 아닌 메소드만 오버라이드 된다. 
 

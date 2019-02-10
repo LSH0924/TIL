@@ -19,31 +19,31 @@
 
 ```java
 class OuterClass {
+  //static Nested Class
+  static class StaticDefaultNestedClass{}
+  public static class StaticPublicNestedClass{}
+  protected static class StaticProtectedNestedClass{}
+  private static class StaticPrivateNestedClass{
+    static String className = "StaticPrivateNestedClass";
+  }
+  final static class StaticFinalNestedClass{}
+    
+  //none static Nested Class
+  class DefaultNestedClass{}
+  public class PublicNestedClass{}
+  protected class ProtectedNestedClass{}
+  private class PrivateNestedClass{
+    String className = "PrivateNestedClass";
+  }
+  final class FinalNestedClass{}
+    
+  // NestedClass, static NestedClass 사용하기
+  public static void main(String[] args) {
     //static Nested Class
-    static class StaticDefaultNestedClass{}
-    public static class StaticPublicNestedClass{}
-    protected static class StaticProtectedNestedClass{}
-    private static class StaticPrivateNestedClass{
-        static String className = "StaticPrivateNestedClass";
-    }
-    final static class StaticFinalNestedClass{}
-    
+    System.out.println(StaticPrivateNestedClass.className);
     //none static Nested Class
-    class DefaultNestedClass{}
-    public class PublicNestedClass{}
-    protected class ProtectedNestedClass{}
-    private class PrivateNestedClass{
-        String className = "PrivateNestedClass";
-    }
-    final class FinalNestedClass{}
-    
-    // NestedClass, static NestedClass 사용하기
-    public static void main(String[] args) {
-        //static Nested Class
-        System.out.println(StaticPrivateNestedClass.className);
-        //none static Nested Class
-        System.out.println(new OuterClass().new PrivateNestedClass().className);
-    }
+    System.out.println(new OuterClass().new PrivateNestedClass().className);
+  }
 }
 ```
 

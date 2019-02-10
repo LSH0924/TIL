@@ -5,18 +5,18 @@
 
 	```java
 	abstract class NoNamedClass{
-		abstract void method();
+	  abstract void method();
 	}
 
 	class Test{
-		public static void main(String[] args) {
-			new NoNamedClass(){     //인스턴스화 시킨 익명클래스는 NoNamedClass의 서브클래스 취급을 받는다
-				@Override
-				void method() {
-					System.out.println("이 클래스는 익명클래스 입니다");
-				}
-			}.method();
-		}
+	  public static void main(String[] args) {
+	    new NoNamedClass(){     //인스턴스화 시킨 익명클래스는 NoNamedClass의 서브클래스 취급을 받는다
+	      @Override
+	      void method() {
+	        System.out.println("이 클래스는 익명클래스 입니다");
+	      }
+	    }.method();
+	  }
 	}
 	```
 
