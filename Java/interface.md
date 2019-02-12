@@ -75,3 +75,8 @@ class A extends Y implements X{
 > ##### **실행결과**
 > Y implements methodA
 > // methodA를 implements한 Y의 메소드가 우선적으로 호출된다. 
+
+-----
+### 참고
+ - Java プログラマ Gold SE8
+ - 직접 돌려봄
