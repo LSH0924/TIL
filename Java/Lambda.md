@@ -70,8 +70,22 @@ class Test{
 > 인스턴스 변수명 :: 메소드명;
 
 - 예시
+    ```java
+    import java.util.Arrays;
+
+    class MethodOne{
+      void method(String str){
+        System.out.println("메소드 실행 : " + str);
+      }
+    }
+    class Test{
+      public static void main(String[] args) {
+        String[] str = new String[] {"a", "b", "c"};
+        Arrays.asList(str).forEach(new MethodOne()::method);
+      }
+    }
     ```
-    ```
+    
     - java.lang.Iterable 의 default void forEach
     - Collection은 Iterable의 인터페이스를 상속하고 있으므로, Collection들은 .forEach() 를 사용할 수 있다.
     - .forEach()의 매개변수가 null이 되면 NullPointException이 발생한다.
