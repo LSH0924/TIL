@@ -90,10 +90,6 @@ class Test{
 | --- | --- |
 | BooleanSupplier | boolean getAsBoolean()|
 
-- 기본형만 다루는 함수형 인터페이스에 WrapperClass를 넣으면 컴파일 에러가 발생함. 
-```java
-  // 에러 발생 예제코드
-```
 -----
 ### 참고
  - Java プログラマ Gold SE8
