@@ -19,3 +19,16 @@
   npm init -y
   ```
 
+
+# 리액트 설치하기
+
+  - window cmd 창에서 애플리케이션이 있는 폴더로 이동 후 아래 명령어 입력
+    ```
+    npm install react
+    ```
+  - node_modules 디렉토리와 pakage.json 파일 생성
+    - node_modules : 설치된 react 패키지 저장
+    - pakage.json
+      - 저장된 패키지의 리스트(의존성, Dependencies) 나열. 
+      - npm 명령어를 통해 node_modules 디렉토리를 초기화 시킬 수 있다.
+      - 노드 패키지 전체 파일을 공유하지 않고도 다른 개발자와 프로젝트를 공유할 수 있다. 
