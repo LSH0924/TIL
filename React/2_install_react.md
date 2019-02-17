@@ -25,7 +25,7 @@
     npm init -y
 
     // 리액트 설치하기
-    npm install react
+    npm install react react-dom
     ```
   - node_modules 디렉토리와 pakage.json 파일 생성
     - node_modules : 설치된 react 패키지 저장
