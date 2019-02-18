@@ -25,7 +25,7 @@
 ## 왜 virtual DOM을 사용할까?
   
   - 브라우저의 workflow
-    <br>![브라우저의 워크플로우](https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjUktzyqsXgAhXIgbwKHfmsBrEQjRx6BAgBEAU&url=https%3A%2F%2Fvelopert.com%2F3236&psig=AOvVaw2PGsRxd7Lg4ZAAHxwbB92p&ust=1550581101710163)
+    <br>![브라우저의 워크플로우](https://velopert.com/wp-content/uploads/2017/03/wvbwscn7oadykroobdd3.png)
 
     
 
