@@ -2,7 +2,7 @@
 
 - 구글 크롬의 자바스크립트 엔진(V8 Engine)을 기반으로 만들어진 **서버사이드 플랫폼**
 - 2009년에 Ryan Dahl에 의해 개발됨
-- 이벤트에 기반한 논 블로킹 I/O모몯모델을으 사용해 가볍고 효율적이다.
+- 이벤트에 기반한 [Non-blocking I/O](https://github.com/LSH0924/TIL/blob/master/Node.js/0.1_Blocking_Non_Blocking.md)모델을 사용해 가볍고 효율적이다.
 - Node.js 의 패키지 생태계인 npm은 세계에서 가장 큰 오픈소스 라이브러리이다.
 - **웹서버 아님. Javascript Runtime일뿐이다. HTTP 서버도 직접 작성해야함**
 
@@ -43,4 +43,4 @@ Node.js를 사용하면서 동기방식의 코드를 사용해벼리면 비동�
 
 - https://velopert.com/133 [[Node.JS] 강좌 01편: 소개]
 
-- https://isme2n.github.io/devlog/2017/06/27/node-js/
+- https://isme2n.github.io/devlog/2017/06/27/node-js/ [[Node]Node.js와 비동기 프로그래밍]
