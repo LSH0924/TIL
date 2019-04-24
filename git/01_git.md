@@ -56,7 +56,7 @@ git config 라는 도구로 Git을 설치하고 난 후에 환경설정 내용�
 - **~/.gitconfig, ~/.config/git/config** : 특정 사용자(현재 환경설정을 한 사용자)에게만 적용되는 설정. `git config --global`으로 이 파일을 읽거나 수정할 수 있다. 특정 사용자의 모든 저장소 설정에 적용된다.
 - **.git/config** : .git 디렉토리 소속. 특정 저장소 혹은 현재 작업중인 프로젝트에만 적용된다. 환경설정을 변경할 프로젝트의 .git 디렉토리로 이동 후, `--local` 옵션으로 이 파일을 사용하도록 지정할 수 있다.<sub>하지만 기본적으로 사용되도록 지정 되어 있다.</sub>
 
-우선순위는 `**.git/config** -> **~/.gitconfig, ~/.config/git/config** -> **/etc/gitconfig**` 이다.
+우선순위는 `.git/config -> ~/.gitconfig, ~/.config/git/config -> /etc/gitconfig` 이다.
 
 ### 사용자 정보
 
