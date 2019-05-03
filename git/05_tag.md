@@ -101,4 +101,20 @@ index e69de29..e4858dd 100644
 
 ## 태그의 체크아웃
 
-나중에 또 읽어보고 이해하면ㅇㅇ..
+태그를 사용해 특정 버전의 파일들을 체크아웃 하고싶을 때는 아래 명령을 사용한다.
+
+```
+$ git checkout <버전의 태그>
+```
+
+단, 브랜치로 체크아웃 하는 게 아닌 태그로 체크아웃 하는 경우 "detached HEAD"<sup>[1](#detached_HEAD)<sup> 상태가 되며, 일부 git 관련 작업이 브랜치에서 작업하는거랑은 다르게 동작할 수 있음. 때문에 버그픽스 등의 의미있는 작업을 할 경우는 반드시 브랜치를 만들어야 한다.
+
+---
+
+<strong id="detached_HEAD">[detached HEAD]</strong> 체크아웃한 시점의 파일을 둘러보고, 자유롭게 커밋할 수 있으나 로컬 저장소에 push 하는 것은 지원되지 않는다. 다른 시점을 checkout 할 경우, 지금까지 한 모든 실험적 커밋을 버린다. 만약 커밋한 내용을 적용하고 싶다면 브랜치를 새로 만드는게 좋다.
+
+---
+
+## 출처
+
+[Git の 'detached HEAD' 状態とその注意点 ](https://yu8mada.com/2018/05/31/detached-head-state-and-its-caution-in-git/)
