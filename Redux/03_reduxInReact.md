@@ -2,7 +2,7 @@
 
 아래 예제를 기반으로 실습. 액션을 위한 파일과 리듀서를 위한 파일을 하나로 작성하는 Ducks Pattern 을 사용한다.
 
-[![Edit colorful-counter](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/03vw6nq910)
+[![Edit colorful-counter](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/2v8kko225n)
 
 ## 리액트에서 리덕스를 사용하기 위해 필요한 라이브러리
 
