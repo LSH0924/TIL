@@ -18,6 +18,6 @@
 
 ---
 
-## 출처
+## 참고
 
 velog - Redux (3) 리덕스를 리액트와 함께 사용하기 - 작성자 : @velopert [https://velog.io/@velopert/Redux-3-리덕스를-리액트와-함께-사용하기-nvjltahf5e](https://velog.io/@velopert/Redux-3-리덕스를-리액트와-함께-사용하기-nvjltahf5e)

@@ -185,7 +185,7 @@ minBtn.onclick = () => {
 
 ---
 
-## 출처
+## 참고
 
 velog - Redux (1) 소개 및 개념정리 - 작성자 : @velopert [https://velog.io/@velopert/redux-1-소개-및-개념정리-zxjlta8ywt](https://velog.io/@velopert/Redux-1-소개-및-개념정리-zxjlta8ywt)
 

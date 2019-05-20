@@ -164,6 +164,6 @@ export default ChangeInfo;
 
 ---
 
-### 출처
+### 참고
 
 https://velopert.com/3606
