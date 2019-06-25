@@ -13,15 +13,33 @@
   
 ## 요소
   - **Component**
-  - **jsx**
-    + React를 위해 만들어진 새로운 자바스크립트 문법
-    + PHP의 개량판인 XHP에서 기원함
-    + 한눈에 이해하기 쉬움(직관적)
   - **바벨(Babel)**
     + 모든 브라우저가 ES6 문법을 해석할 수 있지는 않기 때문에, ES6 와 JSX 로 만들어진 어플리케이션은 바벨을 통해 ES5로 변환된다. 
   - **DOM** : 브라우저가 화면을 그리기 위한 정보가 담겨있는 문서
   - **virtual DOM** : Model 등에 변화가 일어나면 실제 브라우저의 DOM에 새로운 요소를 추가하는 것이 아닌, 자바스크립트로 이루어진 DOM에 한 번 랜더링을 하고, 기존의 DOM과 비교한 후 변화가 필요한 부분만 업데이트시킨다. DOM의 변화를 최소화시킴.
+  - **webpack** : 파일을 묶어 가져오는 번들링 도구. import(혹은 require)로 모듈을 불러오면 번들링시켜 각 모듈들을 하나의 파일로 합쳐준다.
 
+### **jsx**
+  + React를 위해 만들어진 새로운 자바스크립트 문법
+  + PHP의 개량판인 XHP에서 기원함
+  + 한눈에 이해하기 쉬움(직관적)
+  + 바벨이 코드를 변환하는 과정에서 오류를 감지해내기 때문에 편리함
+  + 번들링 될 때 babel-loader를 통해 자바스크립트로 변환
+  ```javascript
+  var a = (
+    <div>
+      <h1>JSX의 <strong>변환</strong></hl>
+    </div>
+  );
+
+  // javascript code로 변환(트리 구조가 됨)
+
+  var a = React.createElement("div", null,
+            React.createElement("h1", null, "JSX의 ", 
+              React.createElement("strong", null, "변환")
+            )
+          );
+  ```
   
 ## 브라우저의 **workflow**
   
@@ -65,3 +83,4 @@
 (https://github.com/the-road-to-learn-react/the-road-to-learn-react-korean/blob/master/manuscript/chapter1.md#12-%EC%A4%80%EB%B9%84-%EC%82%AC%ED%95%AD)
 - 누구든지 하는 리액트 1편: 리액트는 무엇인가<br>(https://velopert.com/3612)
 - [번역] 리액트에 대해서 그 누구도 제대로 설명하기 어려운 것 – 왜 Virtual DOM 인가?<br>(https://velopert.com/3236)
+- 리액트를 다루는 기술 - 김민준 저
