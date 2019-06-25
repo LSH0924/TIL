@@ -55,5 +55,10 @@ import App from "./App"; // import 컴포넌트이름 from 컴포넌트 위치
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
+### ReactDOM.render()
+- ReactDOM.render 의 첫번째 매개변수에는 JSX 형태로 작성한 컴포넌트를, 두번째 매개변수에는 컴포넌트를 랜더링할 Element를 지정한다.
+- 컴포넌트를 페이지에 랜더링한다.
 
-- ReactDOM.render 의 첫번째 매개변수에 랜더링할 컴포넌트를, 두번째 매개변수에는 컴포넌트를 랜더링할 Element를 지정한다.
+---
+## 참고
+리액트를 다루는 기술 - 김민준 저
