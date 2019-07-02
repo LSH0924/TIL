@@ -31,14 +31,37 @@
 
 ## JSX 안에서 자바스크립트 값 사용하기
 
-### 미리 알아둘 것 : const 와 let
+### 미리 알아두기 : const 와 let
   - const는 상수. 선언하고나서 바뀌지 않는 값이다. 배열, 객체일 경우는 변경할 수 있다.
   - let은 바뀔 수 있는 값임을 나타낸다.
   - var의 스코프가 function 단위라면, **const와 let의 스코프는 블록`{}` 단위**
   - const는 객체, 배열의 값이 변경된다고 하더라도 데이터 구조는 변하지 않는다.
   - 같은 블록 내부에서 중복으로 선언 할 수 없다.
   - react는 불변성을 중시하기 때문에 주로 const를 사용
-- render() 안에서 const로 변수를 선언한 뒤, 변수명을 JSX 안의 `{}`<sub>(자바스크립트 표현식)</sub> 안에 넣어주면 사용할 수 있다.
+  - render() 안에서 const로 변수를 선언한 뒤, 변수명을 JSX 안의 `{}`<sub>(자바스크립트 표현식)</sub> 안에 넣어주면 사용할 수 있다.
+
+### 미리 알아두기 : 화살표 함수와 function의 **this**
+- function 의 this 는 자신이 종속된 객체를 가리킨다.
+- 화살표 함수의 this 는 자신이 위치한 인스턴스를 가리킨다. 값을 연산해 바로 반환해야 할 때 사용하기 좋다.
+  ```javascript
+  function CheeseTabby () {
+      this.name = "Cheese";
+      return {
+        name : "Miel"
+          // this가 return 하는 객체를 가리킴
+        , bark : function(){
+          alert(this.name + "이 애옹 하고 울부짖었다.");
+      }
+      , yaong : ()=>{
+          // this가 new CheeseTabby(); 로 만든 인스턴스, 즉 TransparentCitty를 가리킨다.
+          alert(this.name + "가 애옹 하고 울부짖었다.");
+        }
+      }
+    }
+  const TransparentCitty = new CheeseTabby();
+  TransparentCitty.bark(); // Miel이 애옹 하고 울부짖었다.
+  TransparentCitty.yaong(); // Cheese가 애옹 하고 울부짖었다.
+  ```
 
 ## JSX 조건부 랜더링
 
