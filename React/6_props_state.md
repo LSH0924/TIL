@@ -212,28 +212,114 @@
   - 내부에서 state값을 변경할 수 있다.
   - `class fields` 문법을 사용해서 constructor를 사용한것보다 더 간단하게 state를 정의할 수 있다.
 
-    ```javascript
-      // 생성자를 사용할 때
-      constructor(props) {
-        super(props);
-        this.state = {
-          name: "NAME"
-        };
-      }
+### 생성자를 사용해서 state 설정하기
 
-      // class fields 문법을 사용해 정의할 때
-      state = {
-        name: "NAME"
-      }
+  ```javascript
+    // 생성자를 사용할 때 : 컴포넌트를 새로 만들 때 실행
+    /* eslint-disable react/no-typos */
+    import React, {Component} from "react";
+    import PropTypes from "prop-types";
 
-    ```
+    class MyComponent extends Component {
+
+        static defaultProps={
+            name: "이수현"
+            , catAge:9
+        }
+
+        static propTypes={
+            name:PropTypes.string
+            , catAge: PropTypes.number.isRequired
+        }
+
+        constructor(props){
+            super(props);
+            this.state={
+                number:0
+            }
+        }
+
+        render () {
+            return (
+                <div>
+                    실습용 새 컴포넌트 만들기 - new!
+                    <h1>부모 컴포넌트에서 이름 받아오기</h1>
+                    <p>안녕! 내 이름은 {this.props.name} 이라구 해!</p>
+                    <p>내 고양이는 {this.props.catAge}살이야.</p>
+                    <p>하지만 지금은 일본에 살기때문에 실질적으로는 {this.state.number}마리야... 나만 고양이 없어...</p>
+                </div>
+            )
+        }
+    }
+
+    export default MyComponent;
+  ```
 
   - `class fields`문법과 constructor 를 같이 사용한 경우, `class fields`이 먼저 실행-설정 되고 constructor가 나중에 실행-설정된다.
+
+### constructor 밖에서 state 설정하기
+- transform-class-properties 문법을 이용해 constructor 바깥에서 state 를 static으로 선언할 수 있다.
+  ```javascript
+  /* eslint-disable react/no-typos */
+  import React, {Component} from "react";
+  import PropTypes from "prop-types";
+
+  class MyComponent extends Component {
+
+      static defaultProps={
+          name: "이수현"
+          , catAge:9
+      }
+
+      static propTypes={
+          name:PropTypes.string
+          , catAge: PropTypes.number.isRequired
+      }
+
+      state={
+          number:0,
+          TMI:["한국에 가고싶어하지!", "흔들의자에 앉아서 전철 소리 듣는걸 좋아해.", "체력이 거지야..."],
+          clickCount:0
+      }
+
+      render () {
+          // state 에 있는 값 할당하기
+          const {TMI, clickCount} = this.state;
+          // 클릭한 횟수만큼 필터링하고 표시하기
+          const tmiList = TMI
+          .filter((element, index) => index < clickCount)
+          .map((tmi, index) => 
+              (<p key={index}>{tmi}</p>)
+          );
+
+          return (
+              <div>
+                  실습용 새 컴포넌트 만들기 - new!
+                  <h1>부모 컴포넌트에서 이름 받아오기</h1>
+                  <p>안녕! 내 이름은 {this.props.name} 이라구 해!</p>
+                  <p>내 고양이는 {this.props.catAge}살이야.</p>
+                  <p>하지만 지금은 일본에 살기때문에 실질적으로는 {this.state.number}마리야... 나만 고양이 없어...</p>
+                  {/* button에서 이벤트 직접 집어넣기 */}
+                  <button onClick={()=>{
+                          const count = clickCount < 3 ? clickCount + 1 : clickCount;
+                          this.setState({clickCount:count});
+                      }
+                  }>TMI생성기 : 남은 개수 {3 - this.state.clickCount}</button>
+                  {/* JSX 밖에 있는 자바스크립트 변수 사용하기 */}
+                  {tmiList}
+              </div>
+          )
+      }
+  }
+
+  export default MyComponent;
+
+  ```
 
 ## this.setStatae()
 
 - state의 값을 바꾸기 위해 무조건 거쳐가야 하는 함수
-- 이 함수가 호출되면 컴포넌트가 리랜더링 된다.
+- 컴포넌트를 리랜더링 시키기 위한 트리거 역할
 - 객체(Object)로 전달되는 값만 업데이트 한다.
 - 객체를 깊게 탐색할 수는 없어서 state 안에 Object(1)가 있는 경우, Object(1)과 맵핑된 키에 this.setState()의 매개변수로 받은 Object(2)를 맵핑시켜버린다.
 
