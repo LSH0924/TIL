@@ -187,7 +187,7 @@
 
       export default MyComponent;
       ```
-### props의 타입
+### PropTypes로 지정할 수 있는 props의 타입
 
 - array : 배열
 - bool : 참, 거짓 논리값
