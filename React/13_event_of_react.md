@@ -29,4 +29,105 @@
 - Transition
 - 필요할 때 여기서 찾아보기 : https://reactjs.org/docs/events.html#clipboard-events
 
+## 미리 만들어둔 이벤트 메서드를 적용하기
+
+- 임의의 이벤트 메서드를 미리 만들어두고 DOM에 이벤트를 적용할 때는 반드시 생성자(constructor)에서 각각의 메서드를 this와 바인딩 해주어야 한다. 바인딩 작업을 해주지 않으면 호출한 `this.이벤트 메소드 이름` 은 `undefined` 를 반환한다.
+
+```javascript
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+
+    state={
+        message: ""
+    }
+
+    constructor(props){
+        super(props);
+        // 임의로 만든 메서드들을 각각 this 에 바인딩
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+    }
+
+    // input의 onChange 이벤트
+    handleInputChange(event){
+        this.setState({
+            message:event.target.value
+        });
+    }
+
+    // button의 onClick 이벤트
+    handleButtonClick(event){
+        alert(this.state.message);
+        this.setState({
+            message: ""
+        });
+    }
+
+    render() {
+        const {message} = this.state;
+        return (
+            <div>
+                <h1>이벤트 연습</h1>
+                <h2>입력한 값 : {message}</h2>
+                <input
+                type="text"
+                name="message"
+                value={message}
+                placeholder="onChange 이벤트 연습"
+                onChange={this.handleInputChange}/>
+                <button onClick={this.handleButtonClick}>비우기</button>
+            </div>
+        );
+    }
+}
+
+export default EventPractice;
+```
+
+- transform-class-properties 문법을 이용해 함수 형태로 메서드를 정의할 수 있다.
+```javascript
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+
+    state={
+        message: ""
+    }
+
+    // input의 onChange 이벤트
+    handleInputChange = (event)=>{
+        this.setState({
+            message:event.target.value
+        });
+    }
+
+    // button의 onClick 이벤트
+    handleButtonClick = ()=>{
+        alert(this.state.message);
+        this.setState({
+            message: ""
+        });
+    }
+
+    render() {
+        const {message} = this.state;
+        return (
+            <div>
+                <h1>이벤트 연습</h1>
+                <h2>입력한 값 : {message}</h2>
+                <input
+                type="text"
+                name="message"
+                value={message}
+                placeholder="onChange 이벤트 연습"
+                onChange={this.handleInputChange}/>
+                <button onClick={this.handleButtonClick}>비우기</button>
+            </div>
+        );
+    }
+}
+
+export default EventPractice;
+```
 
