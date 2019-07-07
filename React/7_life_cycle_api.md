@@ -22,6 +22,15 @@
 - 원래는 브라우저가 아닌 서버사이드 환경에서 호출하는 용도
 - 기존의 componentWillMount()에서 하던 처리는 constructor과 componentDidMount()에서 처리할 수 있다.
 
+### render()
+
+- 라이프사이클 메서드 중 유일하게 필수
+- 컴포넌트의 모양새를 결정
+- 메서드 내부에서 this.props, this.state 에 접근할 수 있다.
+- 리액트 요소를 반환
+- 아무것도 보여주고싶지 않을 때는 `null` 이나 `false` 를 반환
+- render() 안에서 state 를 변경하거나 웹브라우저에 접근해서는 안된다.
+
 ### componentDidMount()
 
 - 컴포넌트가 화면에 나타나게 되었을 때 호출된다.
