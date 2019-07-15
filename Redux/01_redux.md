@@ -56,18 +56,19 @@
   }
 
   // 마찬가지로 화살표 함수로도 작성할 수 있다.
-  const reducer = (state = initialState, action) => (  // state 가 undefined 일 때 initialState를 사용할 수 있도록 기본값을 설정할 수 있다.
+  // state 가 undefined 일 때 initialState를 사용할 수 있도록 기본값을 설정할 수 있다.
+  const reducer = (state = initialState, action) => (  
     // 상태 업데이트 로직은 여기에
     return alteredState;
   );
   ```
 
-- **스토어(store)** : 하나의 애플리케이션 당 하나의 스토어를 만든다. 현재의 엡 상태와 리듀서, 내장 함수들이 들어있다.
+- **스토어(store)** : 하나의 애플리케이션 당 하나의 스토어를 만든다. 현재 애플리케이션의 상태(state)들과 리듀서, 내장 함수들이 들어있다.
 
   - createStore 함수를 이용해 스토어를 만든다. 파라미터로는 리듀서 함수를 전달.
 
-  - **디스패치(dispatch)** : 스토어의 내장함수. 액션 객체를 파라미터로 받아 리듀서를 실행시킨다.
-  - **구독(subscribe)** : 함수 형태의 값을 파라미터로 받는다. subscribe 함수에 특정 함수를 전달해주면 액션이 디스패치됐을 때마다 전달해준 함수가 호출된다. subscribe 를 호출하면 반환값으로 오는 구독해제용 unsubscribe 함수는 나중에 필요할때 사용한다.<sup>[2](#subscribe)</sup>
+  - **디스패치(dispatch)** : 스토어의 내장함수. 액션을 전달하는 과정. 액션 객체를 파라미터로 받아 리듀서를 실행시킨다.
+  - **구독(subscribe)** : 스토어 값이 필요한 컴포넌트가 스토어를 구독하는 것. 함수 형태의 값을 파라미터로 받는다. subscribe 함수에 특정 함수를 전달해주면 액션이 디스패치됐을 때마다 전달해준 함수가 호출된다. subscribe 를 호출하면 반환값으로 오는 구독해제용 unsubscribe 함수는 나중에 필요할때 사용한다.<sup>[2](#subscribe)</sup>
 
 ```javascript : redux 사용해보기 실습
 import { createStore } from "redux";
@@ -100,6 +101,9 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_SWITCH:
+      // Object.assign을 사용할 수도 있다.
+      // 인자로 받은 객체를 왼쪽으로 덮어쓰면서 원하는 상태를 가진 새 객체를 만들 수 있음
+      // return Object.assign({}, state, {light : !state.light});
       return { ...state, light: !state.light }; // light 값 반전
 
     case INCREMENT:
@@ -115,6 +119,8 @@ function reducer(state = initialState, action) {
 }
 
 // 스토어 만들기
+// 첫 번째 파라미터로는 리듀서 함수가, 두 번째 파라미터로는 스토어의 기본값을 설정한다(옵션). 
+// 두 번째 파라미터가 생략될 경우 리듀서의 초깃값을 스토어의 기본 값으로 사용한다.
 const store = createStore(reducer);
 ```
 
@@ -150,7 +156,10 @@ render();
 
 ```javascript : subscribe 사용예시
 const listner = () => console.log("업데이트!");
-const unsubscribe = store.subscribe(listner); // 나중에 unsubscribe(); 해준다.
+// react-redux의 connect 함수가 대신해줌.
+// 리덕스 스토어의 state 가 바뀔 때마다 특정 함수를 실행시키는것.
+// 구독을 취소해야할 때는 unsubscribe() 를 호출해준다.
+const unsubscribe = store.subscribe(listner);
 ```
 
 예시를 참고해 이 화면에서 스토어 구독하기
