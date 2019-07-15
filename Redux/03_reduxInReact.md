@@ -111,7 +111,6 @@
       // ... 다른 리듀서에서 사용하는 초깃값들도 들어감
     }
     ```
-- Connect 를 이용해 컴포넌트와 스토어 연동
 
 ## 컴포넌트의 분류
 
@@ -137,6 +136,7 @@
 사용자가 이용할 유저 인터페이스와 state 를 다루는 데이터가 분리되어 프로젝트를 이해하기 쉽고, 컴포넌트 재사용률도 높다.
 
 - 컨테이너 컴포넌트 만들기 : PaletteContainer.js
+- connect 를 이용해 컴포넌트와 스토어 연동
 
 ```javascript
 import React, { Component } from "react";
@@ -176,8 +176,13 @@ export default connect(
 )(PaletteContainer);
 ```
 
-- 컨테이너 컴포넌트를 만들 때, react-redux의 connect를 불러와 사용한다. 첫번째 파라미터는 스토어 안에 들어는 값을, 두번째 파라미터는 액션 생성 함수들을 props 로 전달해준다.
-- connect 함수를 호출하면 특정 컴포넌트에 설정된 props 를 전달해준다.
+- 컨테이너 컴포넌트를 만들 때, react-redux의 connect를 불러와 사용한다. 
+- connect 함수의 파라미터 : connect([mapStateToProps], [mapDispatchToProps], [mergeProps])
+  - mapStateToProps : `store.getState()`의 결과값(state)을 파라미터로 받아 컴포넌트의 `props`로 사용할 객체를 반환
+  - mapDispatchToProps : `dispatch`를 파라미터로 받아 액션을 디스패치(전달) 하는 함수들을 객체 안에 넣어서 반환
+  - mergeProps : `state`와 `dispatch`가 동시에 필요한 함수를 `props`로 전달해야 할 때 사용. 일반적으로는 잘 쓰지 않는다.
+
+- connect 함수를 호출하면 mapStateToProps(첫 번째 파라미터), mapDispatchToProps(두 번째 파라미터)에서 정의한 값들을 `props`로 사용하는 컴포넌트를 반환한다.
 - dispatch 함수를 일일히 적용하지 않고 한번에 쓰는 방법도 있다. : CounterContainer.js
 
 ```javascript
@@ -195,6 +200,12 @@ const dispatchToProps = dispatch =>
 // 자동 bind 됨.
 const mapDispatchToProps = { increment, decrement };
 ```
+
+## Provider 컴포넌트로 리액트 앱에 store 연동하기
+### Provider
+- react-redux 라이브러리에 내장된 컴포넌트. 손쉽게 리액트 애플리케이션에 스토어를 연동할 수 있다.
+- Provider를 불러온 후 연동할 프로젝트의 최상위 컴포넌트를 감싼 뒤 Provider 컴포넌트의 props 로 스토어를 넣어준다.
+
 
 ### redux-actions 라이브러리를 이용해 대기자 명단 구현하기
 
