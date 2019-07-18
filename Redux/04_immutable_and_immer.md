@@ -9,6 +9,102 @@
   ```s
   $ yarn add immutable
   ```
+### Immutable.js 사용하기
+
+#### Map
+- Map 함수 안에 객체를 넣어 호출한다.
+- 객체 내부에 또 다른 객체들이 있다면 내부 객체들도 Map으로 감싸주어야 나중에 사용하기 편하다.(나중에 setIn, getIn을 사용할 수 있음)
+- 객체의 내용을 네트워크에서 받아오거나, 전달받는 객체가 너무 복잡하다면 `fromJS`를 사용한다. `fromJS`를 사용하면 내부에 있는 객체는 Map으로 감싸주지 않아도 됨.
+  ```javascript
+  const { Map, fromJS } = Immutable;
+
+  const data = Map({
+    a: 1,
+    b: 2,
+    c: Map({
+      c_1: 0,
+      c_2: 1
+    })
+  });
+
+  const data2 = fromJS({
+    a: 1,
+    b: 2,
+    c: {
+      c_1: 123,
+      c_2: 456
+    }
+  });
+
+  // Immutable 객체를 일반 객체로 변환하기
+  const des = data.toJS();
+  console.log(des); // Object {a: 1, b: 2, c: Object}
+ 
+  // 특정 키의 값 불러오기
+  console.log(data.get("a")); // 1
+
+  // 깊이 있는 값 가져오기
+  console.log(data.getIn(["c", "c_1"])); // 0
+
+  // 값 설정하기 : 데이터가 실제로 변하는것이 아니라 주어진 변화를 적용한 새 Map을 만들어 반환한다.
+  const newData = data.set("a", 1234567890);
+  console.log(newData === data); // false
+
+  // 깊숙히 있는 값 수정하기
+  const newData2 = data.setIn(["c", "c_2"], "99999999");
+  console.log(newData2.get("c").toJS()); // Object {c_1: 0, c_2: "99999999"}
+
+  // 여러 값 동시에 설정하기(성능상으로는 set(), setIn() 을 여러번 하는게 조금 더 빠르다)
+  const newData3 = data.merge({a:10, b:20});
+  const newData4 = data.mergeIn(["c"],{c_1:10, c_2:20});
+  ```
+
+### List
+- 배열 대신 사용
+- 배열과 동일하게 map, filter, sort, push, pop 등의 함수를 내장하고 있다.
+- 위 내장함수를 사용하면 기존 List를 변경하는 것이 아닌, 변경된 새로운 List 를 반환한다.
+  ```javascript
+  const {List, Map, fromJS} = Immutable;
+
+  const list = List([
+    Map({value : 1}), Map({value : 2}), 3, 4
+  ]);
+
+  const list2 = fromJS([
+    {value : 1}, {value : 2}, 3, 4
+  ]);
+
+  // List 의 요소를 가져오거나 설정하는 방법은 Map 을 사용할때와 같다.
+  console.log(list.get(0).toJS()); // Object {value: 1}
+  console.log(list.getIn([0, "value"])); // 1
+  console.log(list.set(0, Map({value : 13579})) === list); // false
+  console.log(list.setIn([0, "value"], 246810).toJS()); // fe {size: 4, _origin: 0, _capacity: 4, _level: 5, _root: null…}
+  // 기존 값을 참조하면서 값을 설정하고싶을 때는 update 를 사용한다.
+  // 첫번째 파라미터는 선택할 인덱스 값, 두번째 파라미터는 선택한 원소를 업데이트 하는 함수.
+  const newList = list.update(0, item => item.set("value", item.get("value")*5));
+  console.log(newList.toJS()); // [Object{value: 5}, Object{value: 2}, 3, 4]
+
+  // 요소 추가하기 : 맨 뒤
+  const newList2 = list.push(5);
+  console.log(newList2.toJS()); // [Object, Object, 3, 4, 5]
+  // 요소 추가하기 : 맨 앞
+  const newList3 = list.unshift(0);
+  console.log(newList3.toJS()); // [0, Object, Object, 3, 4]
+
+  // 요소 제거하기
+  // 파라미터로 제거하고싶은 인덱스를 넣는다.
+  const newList4 = list.delete(0);
+  console.log(newList4.toJS()); // [Object{value: 2}, 3, 4]
+  // 마지막 아이템을 제거하고싶을땐 pop
+  const newList5 = list.pop();
+  console.log(newList5.toJS()); // [Object, Object, 3]
+
+  // 비어있는지 확인하려면
+  console.log(list.isEmpty()); // false
+  ```
+
+### 적용
+
 - immutable.js 를 설치 후, 원래의 state 객체 등을 Map 으로 바꿔준다.
 
   - src/store/module/counter.js
