@@ -8,7 +8,7 @@
 
 - redux : 리덕스 모듈
 - react-redux : 리액트 컴포넌트에서 리덕스를 사용하기 위한 도구
-- redux-actions : 액션 객체, 리듀서 함수 등을 깔끔하게 만들어주는 라이브러리?
+- redux-actions : 액션 객체, 리듀서 함수 등을 깔끔하게 만들어주는 라이브러리<sub>[06_redux-actions.md에 정리](./06_redux-actions.md)</sub> 
 
 ## counter모듈 만들기
 
