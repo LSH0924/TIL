@@ -50,3 +50,30 @@
         - 미들웨어 순서는 applyMiddleware에 전달한 파라미터 순서대로 지정된다.
 - 적용 후
 ![로거 미들웨어 적용](./image/15.1.2.3.png)
+
+### redux-logger
+- 설치
+    ```s
+    $ yarn add redux-logger
+    ```
+- 적용
+    ```javascript
+    import { createStore, applyMiddleware, compose } from "redux";
+    import modules from "./modules";
+    import logger from "redux-logger";
+
+
+    const store = createStore(
+        modules,
+        compose(
+            applyMiddleware(
+                logger
+            ),
+            window.devToolsExtension && window.devToolsExtension()
+        )
+    );
+
+    export default store;
+    ```
+    - redux-logger에서 제공하는 createLogger 를 사용하면 옵션을 지정해 로거를 생성할 수 있다.
+    - [https://github.com/LogRocket/redux-logger#options](https://github.com/LogRocket/redux-logger#options) createLogger에서 사용하는 옵션. 책에 있던 주소가 바뀌었다.
