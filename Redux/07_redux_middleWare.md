@@ -77,3 +77,87 @@
     ```
     - redux-logger에서 제공하는 createLogger 를 사용하면 옵션을 지정해 로거를 생성할 수 있다.
     - [https://github.com/LogRocket/redux-logger#options](https://github.com/LogRocket/redux-logger#options) createLogger에서 사용하는 옵션. 책에 있던 주소가 바뀌었다.
+
+## 비동기 작업을 처리하는 미들웨어
+
+### redux-thunk
+- 리덕스를 사용하는 애플리케이션에서 비동기 작업을 처리할 때 사용하는 가장 기본적인 방법
+- 리덕스를 개발한 댄 아브라모프가 만듦. 직관적이고 간단하다.
+- 객체가 아닌 함수도 디스패치 할 수 있게 만들어, 특정 액션을 디스패치 한 뒤 몇초 뒤에 반영시키는 작업 등 일반 액션 객체로는 할 수 없는 일도 할 수 있게 한다.
+
+#### thunk?
+특정 작업을 나중으로 미루기 위해 함수형태로 감싼 것.
+
+    ```javascript
+    // 일반적인 작업. 선언하고 바로 작업이 수행됨
+    const str = "사과 " + "바나나";
+
+    // thunk 로 만들기. 함수로 만들면 이 작업을 호출할때만 작업이 수행된다.
+    const thunk = () => "사과 " + "바나나";
+    ```
+
+#### thunkCreator
+액션 객체가 아닌 함수를 반환하는 함수를 thunk 생성 함수라고 한다. thunk 생성 함수는 dispatch, getState를 파라미터로 가지는 새로운 함수를 만들어 반환해야 한다.
+
+#### 설치 및 적용
+- 설치
+    ```s
+    $ yarn add redux-thunk
+    ```
+
+- 적용
+    - 스토어에 ReduxThunk 추가하기
+    ```javascript
+    // 리덕스 관련 불러오기
+    import { createStore, applyMiddleware } from "redux";
+    import module from "./modules/counter";
+    import ReduxThunk from "redux-thunk";
+    import logger from "redux-logger";
+
+    export default createStore(module, applyMiddleware(logger, ReduxThunk));
+    ```
+
+    - counter.js 모듈에 thunkCreator 추가
+    ```javascript
+    ...
+    export const increamentAcync = index => dispatch => {
+        setTimeout(() => {
+            dispatch(increament(index));
+        }, 1000);
+    };
+
+    export const decreamentAcync = index => dispatch => {
+        setTimeout(() => {
+            dispatch(decreament(index));
+        }, 1000);
+    };
+    ...
+    ```
+
+    - 컨테이너 컴포넌트에 바뀐 액션 생성 함수 전달해주기
+    ```javascript
+    import React from "react";
+    import CounterList from "../components/CounterList";
+    import {connect} from "react-redux";
+    import { bindActionCreators } from "redux";
+    import * as counterActions from "../modules/counter";
+
+    // 데이터와 함수들을 props로 받는 컴포넌트 생성후
+    // 표시해 줄 컴포넌트를 넣어준다.
+
+    const CounterListContainer = ({ counters, counterAction }) => {
+        return (
+            <CounterList
+            counters={counters}
+            onIncreament={counterAction.increamentAcync}
+            onDecreament={counterAction.decreamentAcync}
+            onSetColor={counterAction.setColor}
+            />
+        );
+    };
+
+    export default connect(
+        state => ({ counters: state }),
+        dispatch => ({ counterAction: bindActionCreators(counterActions, dispatch) })
+    )(CounterListContainer);
+    ```
