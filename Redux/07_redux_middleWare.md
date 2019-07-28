@@ -161,3 +161,8 @@
         dispatch => ({ counterAction: bindActionCreators(counterActions, dispatch) })
     )(CounterListContainer);
     ```
+
+### redux-promise-middleware
+- Promise  객체를 payload로 전달하면, 요청을 시작/성공/실패할 때 액션의 뒷부분에 _PENDING, _FULFILLED, _REJECTED를 붙여 반환한다.
+- 액션타입을 선언할 필요가 없음
+- 위의 접미사는 커스터마이징 가능
