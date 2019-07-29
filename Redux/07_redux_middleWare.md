@@ -163,6 +163,28 @@
     ```
 
 ### redux-promise-middleware
-- Promise  객체를 payload로 전달하면, 요청을 시작/성공/실패할 때 액션의 뒷부분에 _PENDING, _FULFILLED, _REJECTED를 붙여 반환한다.
+- Promise 객체를 payload로 전달하면, 요청을 시작/성공/실패할 때 액션의 뒷부분에 _PENDING, _FULFILLED, _REJECTED를 붙여 반환한다.
 - 액션타입을 선언할 필요가 없음
 - 위의 접미사는 커스터마이징 가능
+
+### redux-pender
+- redux-promise-middleware와 매우 유사
+- 액션 객체 안에 payload가 Promise 형태로 들어있으면 시작하기 전, 정상완료, 실패했을 때 PENDING, SUCESS, FAILURE 접미사를 붙여준다.
+- 요청을 관리하는 리듀서가 포함되어 있다.
+    ```javascript
+    // 리듀서는 요청 상태를 관리한다. 리듀서의 구조는 아래와 같음
+    // pender 리듀서가 자동으로 상태를 변환시켜준다.
+    {
+        pending: {
+            'ACTION_NAME': ~ 
+        },
+        success: {
+            'ACTION_NAME': ~ 
+        },
+        failure: {
+            'ACTION_NAME': ~ 
+        }
+    }
+    ```
+- 요청 관련 액션들을 처리하는 액션 핸들러 함수들을 자동으로 만드는 도구도 포함되어있다.
+- 요청중인 액션을 취소할 수 있다.
