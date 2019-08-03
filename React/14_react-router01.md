@@ -26,3 +26,40 @@
     - path : 경로
     - component : 보여줄 대상 컴포넌트
     - exact : 현재 주소가 path에서 설정한 값과 완벽하게 일치할 때만 컴포넌트를 보여줌
+
+## route params & Query String
+- params를 사용하거나 Query String 을 사용해 라우트의 경로에 특정 값을 집어넣을 수 있다.
+
+### params
+- URL의 params 를 지정할 때는 `:key` 형식으로 지정. 슬래시(/)로 구분하고 key 는 param의 이름으로 사용한다.
+- 설정한 params 객체는 컴포넌트를 라우트로 설정했을 때, props로 전달받는 match 객체 내부에 있다.
+- App.js
+
+    ```javascript
+    import React from "react";
+
+    import {Route} from 'react-router-dom';
+    import {Home, About, TodoList} from '../pages'
+
+    const App = () => {
+        return (
+        <div>
+            <Route exact path="/" component={Home} />
+            // params 의 이름은 name으로 설정한다. 파라미터가 여러 개면 /:key를 여러 개 붙이면 된다.
+            // 라우트에서 :name 값을 선택적으로 입력받을 수 있게 `?`를 입력한다.
+            <Route exact path="/about/:name?" component={About} />
+            <Route exact path="/todo" component={TodoList} />
+        </div>
+        );
+    }
+    export default App;
+    ```
+
+### Query String
+- URL 뒤에 아래 형식으로 지정한다.
+
+> /about/aa?key=value&anotherKey=value
+
+- Query String을 파싱하기 위해서는 `query-string` 라이브러리를 설치해야 한다.
+- 라우트 내부에서 정의 : 라우트로 설정된 대상 컴포넌트의 props 중 하나인 `location` 객체의 `search` 값을 조회한다.
+- 파라미터의 값은 모두 문자열로 들어오기 때문에 사용하기 전에 형변환 시켜주어야 한다.
