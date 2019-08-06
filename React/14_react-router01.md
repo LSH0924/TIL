@@ -22,10 +22,15 @@
 
 ### react-router-dom
 - BrowserRouter: HTML5의 history API를 사용해 새로고침 하지 않고 페이지 주소를 교체해주는 컴포넌트
-- Route: 경로와 보여줄 컴포넌트를 설정하는 컴포넌트
+- Route : 경로와 보여줄 컴포넌트를 설정하는 컴포넌트
     - path : 경로
     - component : 보여줄 대상 컴포넌트
     - exact : 현재 주소가 path에서 설정한 값과 완벽하게 일치할 때만 컴포넌트를 보여줌
+- Link : 새로고침을 사용하지 않고 주소창 상태를 변경, 원하는 라우트로 화면을 전환하는 컴포넌트
+    - to : 이동할 주소
+- NavLink : Link 컴포넌트와 비슷하나, 현재 주소와 해당 컴포넌트의 목적지 주소가 일치하면 특정 스타일 혹은 클래스를 지정할 수 있는 추가 기능이 있다.
+    - activeStyle : to로 지정한 링크를 활성화 했을 때 지정할 스타일
+    - activeClassName : to로 지정한 링크를 활성화 했을 때 지정할 CSS 클래스
 
 ## route params & Query String
 - params를 사용하거나 Query String 을 사용해 라우트의 경로에 특정 값을 집어넣을 수 있다.
@@ -63,3 +68,24 @@
 - Query String을 파싱하기 위해서는 `query-string` 라이브러리를 설치해야 한다.
 - 라우트 내부에서 정의 : 라우트로 설정된 대상 컴포넌트의 props 중 하나인 `location` 객체의 `search` 값을 조회한다.
 - 파라미터의 값은 모두 문자열로 들어오기 때문에 사용하기 전에 형변환 시켜주어야 한다.
+
+## 자바스크립트에서 라우팅
+- 조건에 맞춰 자바스크립트로 페이지를 이동시키는 로직을 작성해야할 때 사용
+- 라우트로 사용된 컴포넌트의 props 중 하나인 history 객체의 push 함수를 활용
+    ```javascript
+    import React from "react";
+    const Home = ({history}) => {
+        return (
+            <div>
+                <h2>HOME</h2>
+                <button
+                onClick = {()=>{
+                    history.push('/about/Javascript');
+                }}>
+                    자바스크립트를 사용해 이동 - about
+                </button>
+            </div>
+        );
+    };
+    export default Home;
+    ```
