@@ -31,6 +31,37 @@
 - NavLink : Link 컴포넌트와 비슷하나, 현재 주소와 해당 컴포넌트의 목적지 주소가 일치하면 특정 스타일 혹은 클래스를 지정할 수 있는 추가 기능이 있다.
     - activeStyle : to로 지정한 링크를 활성화 했을 때 지정할 스타일
     - activeClassName : to로 지정한 링크를 활성화 했을 때 지정할 CSS 클래스
+- withRouter
+    - match, location, history는 라우트로 사용된 컴포넌트에서만 접근할 수 있다.
+    - 라우트 내, 외부 컴포넌트에서는 위 props값을 사용할 수 없다.
+    - 받아오는 props 값은 해당 컴포넌트가 위치한 상위 라우트의 정보이다.
+    - 주로 history에 접근해 컴포넌트에서 라우터를 조작하는 데 사용한다.
+    - withRouter는 해당 라우터의 props에 접근할 수 있게 해준다.
+        ```javascript
+        import React from "react";
+        import { NavLink, withRouter } from "react-router-dom";
+
+        const Menu = () => {
+            const activeStyle = {
+                color: "green",
+                fontSize: "2rem"
+            };
+
+            return (
+                <div>
+                    <ul>
+                        <li><NavLink exact to="/" activeStyle={activeStyle}>홈</NavLink></li>
+                        <li><NavLink exact to="/about/Sane" activeStyle={activeStyle}>소개</NavLink></li>
+                        <li><NavLink exact to="/todo" activeStyle={activeStyle}>TodoList</NavLink></li>
+                        <li><NavLink exact to="/post" activeStyle={activeStyle}>Post</NavLink></li>
+                    </ul>
+                </div>
+            );
+        };
+        // export 할 때 withRouter 에 감싸 내보내면 Menu 컴포넌트에서도 match, location, history를 사용할 수 있게 된다.
+        export default withRouter(Menu);
+        ```
+
 
 ## route params & Query String
 - params를 사용하거나 Query String 을 사용해 라우트의 경로에 특정 값을 집어넣을 수 있다.
