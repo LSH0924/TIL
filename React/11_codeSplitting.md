@@ -1,6 +1,43 @@
 # React에서 CodeSpliting하기
 
+## 코드 스플리팅이란?
+- 코드 분할
+- webpack 에서 프로젝트를 번들링 할 때 파일 하나가 아니라 파일 여러 개로 분산시켜 결과물을 만들 수 있다.
 - 이벤트 등의 평소에는 사용하지 않는 함수의 코드를 나눠 사용할 때마다 불러온다.
+- 나중에 프로젝트를 업데이트 할 때, 업데이트 하는 파일의 크기를 최소화 할 수 있다.
+- 업데이트 시킬 파일들만 업데이트 하기 때문에 브라우저 캐싱 효과를 오래 누릴 수 있고, 트래픽 절감 및 로딩 속도를 개선할 수 있다.
+- webpack 설정 파일을 커스터마이징 해야 하기 때문에 프로젝트의 환경 설정 파일을 밖으로 꺼낸다.
+  ```s
+  $ yarn eject
+  ```
+- **webpack 설정에서 코드 스플리팅 : vendor 설정**
+  - 작성한 코드가 아닌 서드파티 라이브러리를 따로 분리시킨다. 
+  ```javascript
+  entry: [
+      isEnvDevelopment &&
+        require.resolve('react-dev-utils/webpackHotDevClient'),
+      paths.appIndexJs,
+    ].filter(Boolean),
+
+  // ▽객체였던 entry 항목을 변경
+  entry: {
+      app: [
+        // 핫리로드
+        isEnvDevelopment &&
+          require.resolve('react-dev-utils/webpackHotDevClient'),
+        // 프로젝트 엔트리. index.js
+        paths.appIndexJs,
+      ],
+      vendor: [
+        // 구형 웹브라우저에서도 ES6 전용 코드를 제대로 작동할 수 있게 해 주는 라이브러리
+        require.resolve("./polyfils"),
+        "react",
+        "react-dom",
+        "react-router-dom"
+      ]
+    }.filter(Boolean),
+  ```
+  - ~~CommonsChunkPlugin : vendor로 분리된 곳에 들어간 내용들이 app쪽에서 중복되지 않도록 해주는 라이브러리~~ webpack4부터 **splitChunks**로 대체됨.
 
 - notify.js : 이벤트가 일어날 때만 쓰는 코드
 
