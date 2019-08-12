@@ -59,6 +59,32 @@
     }
     export default App;
     ```
+- params 를 받는 About.js
+    ```javascript
+    import React from "react";
+    import queryString from "query-string";
+
+    const About = ({location, match}) => {
+        const query = queryString.parse(location.search);
+        console.log(query);
+        
+        const color = {
+            color: query.color
+        }
+        return (
+            <div>
+                <h2 style={color}>About</h2>
+                <p>리액트 라우터 사용하기 실습</p>
+                <p>안녕하세요, {match.params.name}의 연습장입니다.</p>
+            </div>
+        );
+    };
+
+    export default About;
+    ```
+- match.params에 지정한 파라미터를 사용
+- **match.url** : 현재 라우트에 설정된 경로를 알려준다. 직접 지정하는것보다 match.url을 사용하는 게, 컴포넌트의 라우트 주소를 변경할 때 일일이 변경하지 않아도 된다는 점에서 편하고 정확하다.
+
 
 ### Query String
 - URL 뒤에 아래 형식으로 지정한다.
