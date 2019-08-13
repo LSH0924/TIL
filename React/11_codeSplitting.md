@@ -39,6 +39,44 @@
   ```
   - ~~CommonsChunkPlugin : vendor로 분리된 곳에 들어간 내용들이 app쪽에서 중복되지 않도록 해주는 라이브러리~~ webpack4부터 **splitChunks**로 대체됨.
 
+## 청크를 이용해 비동기적으로 코드 불러오기
+- chunk : 데이터의 덩어리
+- vendor처리는 단순히 캐싱을 원활히 할 수 있게 하는 작업일 뿐, 페이지를 로딩할 때 모든 코드를 불러오는것은 같다.
+- 청크를 이용하면 페이지를 로딩할 때 필요한 파일만 불러올 수 있고, 아직 불러오지 않은 청크 파일들은 나중에 필요할 때 비동기적으로 불러와 사용할 수 있다.
+- 비동기적으로 파일을 불러오기 위해 `import`를 LifeCycleMethod 나 이벤트 핸들러 등 특정 함수 내부에서 작성한다. 
+  - 청크 생성 컴포넌트 : Split.js
+    ```javascript
+    import React from "react";
+    const Split = () => {
+        return <div>청크 생성 컴포넌트</div>;
+    }
+    export default Split;
+    ```
+  - 청크 임포트 컴포넌트 : AsyncSplit.js
+    ```javascript
+    import React, {Component} from "react";
+
+    class AsyncSplit extends Component {
+        state = {
+            Split : null
+        }
+        loadSplit = () => {
+            // import() 는 Promise를 반환한다.
+            // import() 를 사용하면 webpack은 청크를 생성해 저장한다.
+            import("./Split").then(({default: Split}) => {
+                this.setState({ Split });
+            });
+        };
+        render(){
+            const {Split} = this.state;
+            // Split 이 존재하면 컴포넌트 Split을 랜더링, 아닐시 버튼을 표시한다.
+            return Split ? <Split/> : <button onClick={this.loadSplit}>Split Loading</button>;
+        }
+    }
+    export default AsyncSplit;
+    ```
+
+
 - notify.js : 이벤트가 일어날 때만 쓰는 코드
 
 ## 예제 : 간단 코드 스플리팅
