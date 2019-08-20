@@ -16,3 +16,39 @@
 - `/post/?age=20` 형식으로 요청했을 때, `{age:'20'}` 형태의 객체를 얻을 수 있다.
 - 쿼리스트링으로 보낸 객체는 `ctx.query`에서 조회할 수 있다.
 - 문자열 형태의 쿼리스트링을 조회할 때는 `ctx.querystring`을 사용한다.
+
+## 라우트 모듈화
+- 각 라우트를 하나의 index.js파일 안에 두기엔 너무 길고, 유지보수 하기도 힘들기 때문에 모듈로 분리한다.
+
+## 컨트롤러
+- 라우트 처리 함수들만을 분리해둔 파일. 백엔드 기능을 구현한다.
+
+### koa-bodyparser
+- POST/PUT/PATCH 등, 메서드의 Request Body에 JSON 형식으로 데이터를 넣어주면 이 데이터를 파싱 후 서버에서 사용할 수 있게 해준다.
+- 라우터를 설정하는 코드 윗부분에서 적용시켜야 한다.
+    ```javascript
+    const Koa = require("koa");
+    const Router = require("koa-router");
+    const bodyParser = require("koa-bodyParser");
+
+    const api = require("./api");
+
+    const app = new Koa();
+    const router = new Router();
+
+    // 라우터에 api라우트 설정
+    router.use("/api", api.routes());
+
+    // 라우터를 적용하기 전에 bodyParser부터 적용
+    app.use(bodyParser());
+
+    // app 인스턴스에 라우터 적용하기
+    app.use(router.routes()).use(router.allowedMethods());
+
+    // 40000번 포트 열기. 연결되면 console.log를 출력
+    app.listen(4000, () => {
+        console.log("4000번 포트에 연결되었습니다.");
+    });
+
+    const hello = 'hello';
+    ```
