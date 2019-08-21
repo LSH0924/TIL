@@ -44,11 +44,29 @@
 
     // app 인스턴스에 라우터 적용하기
     app.use(router.routes()).use(router.allowedMethods());
+    ...
+    ```
+- REST API의 request body는 `ctx.request.body`에서 조회가능
+- 아래의 형식으로 컨트롤러를 작성한다.
+    ```javascript
+    exports.write = (ctx) => {
+        const {title, body} = ctx.request.body;
+        postId++;
 
-    // 40000번 포트 열기. 연결되면 console.log를 출력
-    app.listen(4000, () => {
-        console.log("4000번 포트에 연결되었습니다.");
-    });
+        // 등록할 포스트 객체 작성
+        const post = {
+            id: postId, title, body
+        };
 
-    const hello = 'hello';
+        post.push(post);
+        ctx.body = post;
+    };
+    ...
+    ```
+- export 한 컨트롤러 함수는 아래와 같이 불러와 사용할 수 있다.
+    ```javascript
+    const postsCtrl = require("./posts.ctrl");
+    ...
+    posts.get("/", postsCtrl.list);
+    ...
     ```
