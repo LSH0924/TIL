@@ -65,3 +65,38 @@
     ...
 
     ```
+
+- RequestBody 검증
+    - write, update API에서 전달받은 요청 내용(request.body) 검증
+    - requestbody에 필수 요소가 존재하지 않으면 잘못된 요청으로 판단할 수 있다.
+    - 데이터 검증용 라이브러리인 joi 설치
+    - 검증할 데이터의 스키마를 만들어 `Joi.validate(검증 대상 데이터 객체, 검증용으로 만든 데이터 객체)`를 이용해 검사한다.
+    ```javascript
+    ...
+
+    /**
+     * 포스트 작성하기
+    * {title, body}
+    */
+    exports.write = async ctx => {
+
+        // requestBody값 검증용 스키마 만들기
+        const schema = Joi.object().keys({
+            title: Joi.string().required(), // required() -> 필수항목
+            body: Joi.string().required(),
+            tags: Joi.array().items(Joi.string()) // String 요소(item)로 가진 배열을 나타냄.
+        });
+
+        // Joi.validate()를 이용해 검증. 첫 번째 매개변수는 검증 대상 객체, 두 번째 매개변수는 검증용 스키마
+        const result = Joi.validate(ctx.request.body, schema);
+
+        // validate 결과에 에러 값이 존재할 경우
+        if(result.error){
+            ctx.status = 400; // 잘못된 요청
+            // 에러 내용을 body에 담아 반송
+            ctx.body = result.error;
+            return;
+        }
+    ...
+
+    ```
