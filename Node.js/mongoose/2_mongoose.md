@@ -48,4 +48,20 @@
 ### 요청 검증
 - ObjectId 검증
     - mongoose 라이브러리의 ObjectId 모듈을 이용한 아이디(_id : 문서의 아이디)의 형식 검증
-    - 
+    - 미들웨어 만들어서 ObjectId 검증하기 : src/api/posts/posts.ctrl.js
+    ```javascript
+    ...
+    /**
+     * 요청할 때 ID 검증하기
+    */
+    exports.checkObjectId = (ctx, next) => {
+        const {id} = ctx.params;
+        if(!ObjectId.isValid(id)){
+            ctx.status = 400; // 잘못된 요청을 받으면 400 오류를 발생시킨다.
+            return null;
+        }
+        return next();
+    };
+    ...
+
+    ```
